@@ -1,0 +1,33 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run format
+      - name: Commit & Push
+        uses: stefanzweifel/git-auto-commit-action@v4.2.0
+        id: auto_commit_action
+        with:
+          commit_user_name: prodev_bot
+          commit_user_email: bot@prodev.sh
+          commit_author: prodev bot <bot@prodev.sh>
+          commit_message: Bot - Fix formatting
+      - name: Success
+        if: steps.auto_commit_action.outputs.changes_detected == 'false'
+        run: echo "Format check... PASS!"
+      - name: Error
+        if: steps.auto_commit_action.outputs.changes_detected == 'true'
+        run: echo "Fixed formatting... pushed changes!" && exit 1
+      
