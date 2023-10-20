@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "xo --fix",
-    "format:check": "xo"
+    "format:check": "xo",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "13.5.4",
