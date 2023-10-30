@@ -11,4 +11,9 @@
 body {
   background: var(--background-100);
   color: var(--foreground-72);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.02rem;
 }
