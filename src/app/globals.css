@@ -4,7 +4,7 @@
 
 :root {
   --background-100: #000000;
-  --background-64: rgba(0,0,0,0, 0.64);
+  --background-64: rgba(0,0,0,0.64);
 
   --foreground-72: rgba(255, 255, 255, 0.72);
 }

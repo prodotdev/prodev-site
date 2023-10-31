@@ -1,0 +1,7 @@
+.root {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background: url(/home-gradient-bg.jpg) no-repeat 0 0, linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 100%);
+  background-size: 100%;
+  background-blend-mode: overlay, normal;
+}
