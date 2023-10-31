@@ -1,10 +1,9 @@
 name: Validate
 
 on:
-  push:
+  pull_request:
     branches:
-      - '**'
-      - '!main'
+      - main
 
 jobs:
   typecheck:
@@ -24,6 +23,7 @@ jobs:
         with:
           node-version: 18
           token: ${{ secrets.BOT_GH_TOKEN }}
+          ref: ${{ github.head_ref }}
       - run: npm i
       - run: npm run format
       - name: Commit & Push
