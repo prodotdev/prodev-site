@@ -23,13 +23,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+          token: ${{ secrets.BOT_GH_TOKEN }}
       - run: npm i
       - run: npm run format
       - name: Commit & Push
         uses: stefanzweifel/git-auto-commit-action@v4.2.0
         id: auto_commit_action
         with:
-          commit_user_name: prodev_bot
+          commit_user_name: prodev-bot
           commit_user_email: bot@prodev.sh
           commit_author: prodev bot <bot@prodev.sh>
           commit_message: Bot - Fix formatting
