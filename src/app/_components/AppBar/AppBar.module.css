@@ -1,0 +1,5 @@
+.root {
+  padding: 0.375rem 1rem;
+  background: var(--background-64);
+  backdrop-filter: blur(16px);
+}
