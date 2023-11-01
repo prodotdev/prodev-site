@@ -1,3 +1,9 @@
+import AppBar from '@/app/_components/AppBar'
+
 export default function Home() {
-  return <div>hello, some content.</div>
+  return (
+    <div>
+      <AppBar />
+    </div>
+  )
 }
