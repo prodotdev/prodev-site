@@ -19,3 +19,16 @@
 .image {
   margin-bottom: 0.75rem;
 }
+
+.link {
+  text-decoration: underline;
+  color: var(--brand-900);
+
+  &:hover {
+    color: var(--brand-1000);
+  }
+
+  &:visited {
+    color: var(--foreground-72);
+  }
+}

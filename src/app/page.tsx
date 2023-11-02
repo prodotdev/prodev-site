@@ -37,7 +37,9 @@ export default function Home() {
             Layouts defined inside a folder (e.g. app/dashboard/layout.js) apply
             to specific route segments (e.g. acme.com/dashboard) and render when
             those segments are active. By default,{' '}
-            <a href="#">layouts in the file hierarchy</a>
+            <a href="#" className={styles.link}>
+              layouts in the file hierarchy
+            </a>{' '}
             are nested, which means they wrap child layouts via their children
             prop.
           </p>
