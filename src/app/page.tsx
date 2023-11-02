@@ -2,12 +2,13 @@ import AppBar from '@/app/_components/AppBar'
 import styles from '@/app/_components/Home.module.css'
 import Image from 'next/image'
 import imagePlaceholder from '@/app/_components/image-placeholder.jpeg'
+import Page from '@/lib/ui/Page'
 
 export default function Home() {
   return (
     <div className={styles.root}>
       <AppBar />
-      <div>
+      <Page>
         <h1>Routing</h1>
         <p>
           The App Router inside Next.js 13 introduced new file conventions to
@@ -32,7 +33,7 @@ export default function Home() {
           are nested, which means they wrap child layouts via their children
           prop.
         </p>
-      </div>
+      </Page>
     </div>
   )
 }
