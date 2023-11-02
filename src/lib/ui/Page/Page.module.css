@@ -14,8 +14,9 @@
   }
 }
 
-.content {
+.container {
   width: 100%;
+
   @media (min-width: breakpointLg) {
     max-width: 900px;
   }

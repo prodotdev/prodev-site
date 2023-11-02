@@ -8,7 +8,7 @@ export default function Page(props: PageProps) {
 
   return (
     <div className={styles.root}>
-      <div className={styles.content}>{children}</div>
+      <div className={styles.container}>{children}</div>
     </div>
   )
 }
