@@ -29,6 +29,13 @@
   }
 
   &:visited {
-    color: var(--foreground-72);
+    color: var(--white-72);
   }
+}
+
+.strong {
+  border-radius: 2px;
+  background: var(--white-12);
+  border: 0.5px solid var(--white-24);
+  padding: 0 0.125rem;
 }

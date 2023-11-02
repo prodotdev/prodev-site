@@ -27,9 +27,10 @@ export default function Home() {
           />
           <p>
             A page is UI that is unique to a route. You can define pages by
-            exporting a component from a <strong>page.js</strong> file. Use
-            nested folders to define a route and a page.js file to make the
-            route publicly accessible.
+            exporting a component from a{' '}
+            <strong className={styles.strong}>page.js</strong> file. Use nested
+            folders to define a route and a page.js file to make the route
+            publicly accessible.
           </p>
           <div className="divider" />
           <Heading>Nesting Layouts</Heading>
