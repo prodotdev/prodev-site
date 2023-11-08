@@ -1,8 +1,10 @@
 import AppBar from '@/app/_components/AppBar'
 import styles from '@/app/_components/Home.module.css'
 import imagePlaceholder from '@/app/_components/image-placeholder.png'
+import Heading from '@/lib/ui/Heading'
 import Page from '@/lib/ui/Page'
 import PageMain from '@/lib/ui/PageMain'
+import Title from '@/lib/ui/Title'
 import Image from 'next/image'
 
 export default function Home() {
@@ -12,7 +14,7 @@ export default function Home() {
       <Page>
         <PageMain>
           <div>
-            <h1>Routing</h1>
+            <Title className={styles.title}>Routing</Title>
             <p>
               A page is UI that is unique to a route. You can define pages by
               exporting a component from a page.js file. Use nested folders to
@@ -25,7 +27,7 @@ export default function Home() {
             </p>
             <Image src={imagePlaceholder} alt="placeholder" />
             <div className="divider" />
-            <h2>Nesting Layouts</h2>
+            <Heading>Nesting Layouts</Heading>
             <p>
               Layouts defined inside a folder (e.g. app/dashboard/layout.js)
               apply to specific route segments (e.g. acme.com/dashboard) and

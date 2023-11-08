@@ -1,3 +1,5 @@
+@value breakpointMd, breakpointLg from '@/lib/styles/breakpoints.module.css';
+
 .root {
   height: 100vh;
   background-repeat: no-repeat;
@@ -5,3 +7,12 @@
   background-size: 100%;
   background-blend-mode: overlay, normal;
 }
+
+.title {
+  margin-bottom: 1.25rem;
+
+  @media (min-width: breakpointMd) {
+    margin-bottom: 1.5rem;
+  }
+}
+

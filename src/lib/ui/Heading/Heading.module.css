@@ -1,0 +1,13 @@
+@value breakpointMd, breakpointLg from '@/lib/styles/breakpoints.module.css';
+
+.root {
+  font-size: 2.25rem;
+  letter-spacing: -0.045rem;
+  line-height: normal;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+
+  @media (min-width: breakpointLg) {
+    font-size: 2.5rem;
+  }
+}
