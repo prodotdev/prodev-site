@@ -1,7 +1,41 @@
+@value breakpointMd, breakpointLg from '@/lib/styles/breakpoints.module.css';
+
 .root {
   height: 100vh;
   background-repeat: no-repeat;
   background: url(/home-gradient-bg.jpg) no-repeat, linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 100%);
   background-size: 100%;
   background-blend-mode: overlay, normal;
+
+  img {
+    margin-bottom: 0.75rem;
+  }
+
+  a {
+    text-decoration: underline;
+    color: var(--brand-900);
+  
+    &:hover {
+      color: var(--brand-1000);
+    }
+  
+    &:visited {
+      color: var(--white-72);
+    }
+  }
+
+  strong {
+    border-radius: 2px;
+    background: var(--white-12);
+    border: 0.5px solid var(--white-24);
+    padding: 0 0.125rem;
+  }
+}
+
+.title {
+  margin-bottom: 1.25rem;
+
+  @media (min-width: breakpointMd) {
+    margin-bottom: 1.5rem;
+  }
 }

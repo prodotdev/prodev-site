@@ -6,6 +6,13 @@
   --background-100: #000000;
   --background-64: rgba(0,0,0,0.64);
 
+  --white-72: rgba(255, 255, 255, 0.72);
+  --white-24: rgba(255, 255, 255, 0.24);
+  --white-12: rgba(255, 255, 255, 0.12);
+
+  --brand-900: #A88DFF;
+  --brand-1000: #CBBBFF;
+
   --foreground-72: rgba(255, 255, 255, 0.72);
 }
 
@@ -17,4 +24,11 @@ body {
   font-weight: 400;
   line-height: 140%;
   letter-spacing: -0.02rem;
+}
+
+
+p {
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
 }
