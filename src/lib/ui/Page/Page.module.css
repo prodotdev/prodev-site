@@ -9,5 +9,15 @@
 
   @media (min-width: breakpointLg) {
     padding: 1rem 0 6.25rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.content {
+  width: 100%;
+
+  @media (min-width: breakpointLg) {
+    width: 900px;
   }
 }
