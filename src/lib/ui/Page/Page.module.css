@@ -16,6 +16,9 @@
 
 .content {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 
   @media (min-width: breakpointLg) {
     width: 900px;
