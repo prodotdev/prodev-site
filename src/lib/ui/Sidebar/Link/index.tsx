@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import styles from '@/lib/ui/SideNav/Link/Link.module.css'
+import styles from '@/lib/ui/Sidebar/Link/Link.module.css'
 import classNames from 'classnames'
 
 interface LinkProps extends PropsWithChildren {
