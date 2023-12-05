@@ -10,9 +10,9 @@ export default function Section(props: SectionProps) {
   const { children, title } = props
 
   return (
-    <div className={styles.root}>
+    <div>
       <div className={styles.header}>
-        <span className={styles.title}>{title}</span>
+        <span>{title}</span>
         <ArrowUpIcon className={styles.arrowIcon} />
       </div>
       {children}
