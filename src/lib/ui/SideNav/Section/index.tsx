@@ -6,6 +6,14 @@ interface SectionProps extends PropsWithChildren {
 }
 
 export default function Section(props: SectionProps) {
-  const { children } = props
-  return <div className={styles.section}>{children}</div>
+  const { children, title } = props
+
+  return (
+    <div className={styles.root}>
+      <div className={styles.header}>
+        <span className={styles.title}>{title}</span>
+      </div>
+      {children}
+    </div>
+  )
 }

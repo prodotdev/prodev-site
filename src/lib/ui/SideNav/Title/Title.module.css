@@ -1,7 +1,5 @@
 .root {
- font-size: 1.125rem; 
  font-weight: 500;
  color: var(--white-100);
- line-height: 140%;
  margin-bottom: 0.375rem;
 }
