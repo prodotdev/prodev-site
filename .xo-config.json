@@ -33,7 +33,8 @@
     "no-warning-comments": "off",
     "node/prefer-global/process": "off",
     "node/prefer-global/buffer": "off",
-    "no-constant-condition": "off"
+    "no-constant-condition": "off",
+    "n/file-extension-in-import": "off"
   },
   "overrides": [
     {
