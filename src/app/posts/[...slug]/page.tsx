@@ -5,12 +5,17 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 
 interface PostProps {
   params: {
-    slug: string
+    slug: string[]
   }
 }
 
 export default function Post(props: PostProps) {
-  const post = getPost(props.params)
+  const {
+    params: { slug },
+  } = props
+
+  const postPath = slug.join('/')
+  const post = getPost(postPath)
 
   return (
     <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto">
@@ -29,8 +34,8 @@ export default function Post(props: PostProps) {
   )
 }
 
-function getPost({ slug }: { slug: string }) {
-  const filePath = path.join('posts', slug + '.mdx')
+function getPost(postPath: string) {
+  const filePath = path.join('posts', postPath + '.mdx')
 
   const markdownFile = fs.readFileSync(filePath, 'utf8')
 
@@ -38,7 +43,6 @@ function getPost({ slug }: { slug: string }) {
 
   return {
     frontMatter,
-    slug,
     content,
   }
 }
