@@ -56,8 +56,6 @@ export async function generateStaticParams() {
     return { slug }
   })
 
-  console.log(paths)
-
   return paths
 }
 
@@ -77,9 +75,9 @@ function getFiles(dirPath: string) {
         results.push(filePath)
       }
     }
-  } catch (error) {
-    console.error(error)
-    //
+  } catch {
+    // ignore failing to read any unknown directories/files
+    // such as OS files, e.g. .DS_Store.
   }
   return results
 }
