@@ -3,6 +3,7 @@ import path from 'node:path'
 import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
+import { notFound, redirect } from 'next/navigation'
 
 interface PostProps {
   params: {
@@ -16,6 +17,9 @@ export default function Post(props: PostProps) {
   } = props
 
   const post = getPost(slug)
+  if (!post) {
+    return handleMissingPost(slug)
+  }
 
   return (
     <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto">
@@ -32,6 +36,10 @@ export default function Post(props: PostProps) {
       />
 
       <br />
+
+      <Link href={`/posts/${post.frontMatter.series?.url}`}>
+        <h2>{post.frontMatter.series?.name}</h2>
+      </Link>
       <h2>LINKS</h2>
       <ul>
         {post.links.map((link) => (
@@ -44,6 +52,50 @@ export default function Post(props: PostProps) {
       </ul>
     </article>
   )
+}
+
+function handleMissingPost(urlPaths: string[]) {
+  const firstPost = getFirstPost(urlPaths)
+  if (firstPost) {
+    return redirect(firstPost)
+  }
+
+  return notFound()
+}
+
+function getFirstPost(urlPaths: string[]) {
+  const fullPath = path.join('posts', urlPaths.join('/'))
+  const isDir = checkIsDirectory(fullPath)
+  if (!isDir) {
+    return null
+  }
+
+  const files: string[] = fs.readdirSync(fullPath)
+  for (const file of files) {
+    const filePath = `${fullPath}/${file}`
+    if (file.includes('.mdx')) {
+      return `/${filePath.replace('.mdx', '')}`
+    }
+
+    const isNestedDir = checkIsDirectory(filePath)
+    if (!isNestedDir) {
+      continue
+    }
+
+    const newPaths = filePath.split('/')
+    newPaths.shift() // remove posts
+    return getFirstPost(newPaths)
+  }
+
+  return null
+}
+
+function checkIsDirectory(dirPath: string) {
+  try {
+    return fs.lstatSync(dirPath).isDirectory()
+  } catch {
+    return false
+  }
 }
 
 export async function generateStaticParams() {
@@ -83,6 +135,14 @@ function getFiles(dirPath: string) {
 }
 
 function getPost(urlPaths: string[]) {
+  try {
+    return readPostFile(urlPaths)
+  } catch {
+    return null
+  }
+}
+
+function readPostFile(urlPaths: string[]) {
   const postPath = urlPaths.join('/')
   const filePath = path.join('posts', postPath + '.mdx')
 
@@ -106,7 +166,7 @@ function getPost(urlPaths: string[]) {
       })
     }
   } catch {
-    //
+    // ignore if post has no related posts
   }
 
   const markdownFile = fs.readFileSync(filePath, 'utf8')
