@@ -42,7 +42,7 @@ export default function Post(props: PostProps) {
       </Link>
       <h2>LINKS</h2>
       <ul>
-        {post.links.map((link) => (
+        {post.relatedPosts.map((link) => (
           <li key={link.title}>
             <Link href={link.path}>
               {link.isCurrent ? <strong>{link.title}</strong> : link.title}
@@ -146,9 +146,27 @@ function readPostFile(urlPaths: string[]) {
   const postPath = urlPaths.join('/')
   const filePath = path.join('posts', postPath + '.mdx')
 
-  const links = []
+  const series = getGroupInfo(urlPaths.slice(0, -1))
+  const section = getGroupInfo(urlPaths)
 
+  const relatedPosts = getRelatedPosts(urlPaths)
+  const markdownFile = fs.readFileSync(filePath, 'utf8')
+
+  const { data: frontMatter, content } = matter(markdownFile)
+
+  return {
+    frontMatter,
+    content,
+    series,
+    section,
+    relatedPosts,
+  }
+}
+
+function getRelatedPosts(urlPaths: string[]) {
+  const links = []
   const parentDir = path.join('posts', urlPaths.slice(0, -1).join('/'))
+
   try {
     const targetPost = urlPaths.at(-1) + '.mdx'
     const siblingPosts = fs.readdirSync(parentDir)
@@ -169,13 +187,34 @@ function readPostFile(urlPaths: string[]) {
     // ignore if post has no related posts
   }
 
-  const markdownFile = fs.readFileSync(filePath, 'utf8')
+  return links
+}
 
-  const { data: frontMatter, content } = matter(markdownFile)
+function getGroupInfo(urlPaths: string[]) {
+  const parentDir = path.join('posts', urlPaths.slice(0, -1).join('/'))
 
-  return {
-    frontMatter,
-    content,
-    links,
+  try {
+    const files = fs.readdirSync(parentDir)
+
+    for (const file of files) {
+      if (file !== 'info.json') {
+        continue
+      }
+      const infoPath = `${parentDir}/${file}`
+
+      const infoPathsArray = parentDir.split('/')
+      infoPathsArray.shift()
+      const infoFile = fs.readFileSync(infoPath, 'utf8')
+      const section = JSON.parse(infoFile)
+
+      return {
+        ...section,
+        url: `/${infoPathsArray.join('/')}`,
+      }
+    }
+  } catch {
+    //
   }
+
+  return null
 }
