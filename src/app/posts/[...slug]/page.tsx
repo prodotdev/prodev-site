@@ -56,36 +56,6 @@ export default function Post(props: PostProps) {
               }}
             />
           </div>
-
-          <br />
-
-          {post.series && (
-            <Link href={post.series?.url}>{post.series?.title}</Link>
-          )}
-          <h2>Series</h2>
-          <ul>
-            {post.series?.links.map((link) => (
-              <li key={link.title}>
-                <Link href={link.path}>
-                  {link.isCurrent ? <strong>{link.title}</strong> : link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {post.topic && (
-            <Link href={post.topic?.url}>{post.topic?.title}</Link>
-          )}
-          <h2>Topics</h2>
-          <ul>
-            {post.topic?.links.map((link) => (
-              <li key={link.title}>
-                <Link href={link.path}>
-                  {link.isCurrent ? <strong>{link.title}</strong> : link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </PageMain>
         {post.series && (
           <DesktopPostNav series={post.series} topic={post.topic} />

@@ -41,7 +41,6 @@ export default function Home() {
             </p>
           </PostSection>
         </PageMain>
-        <PostNav />
       </Page>
     </div>
   )
