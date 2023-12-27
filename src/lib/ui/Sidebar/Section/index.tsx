@@ -1,20 +1,27 @@
 import { PropsWithChildren } from 'react'
 import styles from '@/lib/ui/Sidebar/Section/Section.module.css'
-import ArrowUpIcon from '@/lib/icons/arrow-up-icon.svg'
+import Link from 'next/link'
+import classNames from 'classnames'
 
 interface SectionProps extends PropsWithChildren {
   title: string
+  href: string
+  isActive?: boolean
 }
 
 export default function Section(props: SectionProps) {
-  const { children, title } = props
+  const { children, title, href, isActive } = props
 
   return (
     <div>
-      <div className={styles.header}>
+      <Link
+        href={href}
+        className={classNames(styles.header, {
+          [styles.headerActive]: isActive,
+        })}
+      >
         <span>{title}</span>
-        <ArrowUpIcon className={styles.arrowIcon} />
-      </div>
+      </Link>
       {children}
     </div>
   )

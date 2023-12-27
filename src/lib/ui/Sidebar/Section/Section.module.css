@@ -10,3 +10,8 @@
     stroke: var(--white-55);
   }
 }
+
+
+.headerActive {
+  color: var(--white-100);
+}

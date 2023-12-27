@@ -4,6 +4,13 @@ import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
+import Title from '@/lib/ui/Title'
+import styles from '@/app/posts/[...slug]/_components/Post.module.css'
+import Heading from '@/lib/ui/Heading'
+import Page from '@/lib/ui/Page'
+import PageMain from '@/lib/ui/PageMain'
+import AppBar from '@/app/_components/AppBar'
+import DesktopPostNav, { NavGroup } from '@/app/_components/DesktopPostNav'
 
 interface PostProps {
   params: {
@@ -15,20 +22,8 @@ interface PostData {
   title?: string
   tags?: string[]
   content: string
-  series?: PostGroup
-  topic?: PostGroup
-}
-
-interface PostGroup {
-  title: string
-  url: string
-  links: PostLink[]
-}
-
-interface PostLink {
-  title: string
-  path: string
-  isCurrent: boolean
+  series?: NavGroup
+  topic?: NavGroup
 }
 
 export default function Post(props: PostProps) {
@@ -41,48 +36,62 @@ export default function Post(props: PostProps) {
     return handleMissingPost(slug)
   }
 
-  console.log(post.series)
-
   return (
-    <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto">
-      <h1>{post.title}</h1>
+    <div className={styles.root}>
+      <AppBar />
+      <Page>
+        <PageMain>
+          <div className={styles.content}>
+            <MDXRemote
+              source={post.content}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [],
+                  rehypePlugins: [],
+                },
+              }}
+              components={{
+                h1: (props) => <Title className={styles.title} {...props} />,
+                h2: Heading,
+              }}
+            />
+          </div>
 
-      <MDXRemote
-        source={post.content}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [],
-            rehypePlugins: [],
-          },
-        }}
-      />
+          <br />
 
-      <br />
+          {post.series && (
+            <Link href={post.series?.url}>{post.series?.title}</Link>
+          )}
+          <h2>Series</h2>
+          <ul>
+            {post.series?.links.map((link) => (
+              <li key={link.title}>
+                <Link href={link.path}>
+                  {link.isCurrent ? <strong>{link.title}</strong> : link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-      {post.series && <Link href={post.series?.url}>{post.series?.title}</Link>}
-      <h2>Series</h2>
-      <ul>
-        {post.series?.links.map((link) => (
-          <li key={link.title}>
-            <Link href={link.path}>
-              {link.isCurrent ? <strong>{link.title}</strong> : link.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      {post.topic && <Link href={post.topic?.url}>{post.topic?.title}</Link>}
-      <h2>Topics</h2>
-      <ul>
-        {post.topic?.links.map((link) => (
-          <li key={link.title}>
-            <Link href={link.path}>
-              {link.isCurrent ? <strong>{link.title}</strong> : link.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </article>
+          {post.topic && (
+            <Link href={post.topic?.url}>{post.topic?.title}</Link>
+          )}
+          <h2>Topics</h2>
+          <ul>
+            {post.topic?.links.map((link) => (
+              <li key={link.title}>
+                <Link href={link.path}>
+                  {link.isCurrent ? <strong>{link.title}</strong> : link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </PageMain>
+        {post.series && (
+          <DesktopPostNav series={post.series} topic={post.topic} />
+        )}
+      </Page>
+    </div>
   )
 }
 
