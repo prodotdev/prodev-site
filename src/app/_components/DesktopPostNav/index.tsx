@@ -23,6 +23,7 @@ export interface NavLink {
 
 export default function DesktopPostNav(props: DesktopPostNavProps) {
   const { series, topic } = props
+
   return (
     <Sidebar className={styles.root}>
       <Title>{series.title}</Title>

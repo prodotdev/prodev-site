@@ -2,8 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import Link from 'next/link'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Title from '@/lib/ui/Title'
 import styles from '@/app/posts/[...slug]/_components/Post.module.css'
 import Heading from '@/lib/ui/Heading'
@@ -33,7 +32,7 @@ export default function Post(props: PostProps) {
 
   const post = getPost(slug)
   if (!post) {
-    return handleMissingPost(slug)
+    return notFound()
   }
 
   return (
@@ -63,15 +62,6 @@ export default function Post(props: PostProps) {
       </Page>
     </div>
   )
-}
-
-function handleMissingPost(urlPaths: string[]) {
-  const firstPost = getFirstPost(urlPaths)
-  if (firstPost) {
-    return redirect(firstPost)
-  }
-
-  return notFound()
 }
 
 function getFirstPost(urlPaths: string[]) {
@@ -159,8 +149,8 @@ function readPostFile(urlPaths: string[]): PostData {
 
   const hasSection = urlPaths.length > 2
 
-  const series = getGroupInfo(hasSection ? urlPaths.slice(0, -1) : urlPaths)
-  const topic = getGroupInfo(hasSection ? urlPaths : [])
+  const series = getGroup(hasSection ? urlPaths.slice(0, -1) : urlPaths)
+  const topic = getGroup(hasSection ? urlPaths : [])
 
   const relatedPosts = getRelatedPosts(urlPaths)
   const markdownFile = fs.readFileSync(filePath, 'utf8')
@@ -217,7 +207,7 @@ function getRelatedPosts(urlPaths: string[]) {
           links.push({
             title: infoFile.title,
             isCurrent: siblingPath.includes(urlPaths.join('/')),
-            path: `/${siblingPath}`,
+            path: getFirstPost(urlPaths.slice(0, -1)),
           })
         }
       }
@@ -229,7 +219,7 @@ function getRelatedPosts(urlPaths: string[]) {
   return links
 }
 
-function getGroupInfo(urlPaths: string[]) {
+function getGroup(urlPaths: string[]) {
   const parentDir = path.join('posts', urlPaths.slice(0, -1).join('/'))
 
   try {
@@ -239,6 +229,7 @@ function getGroupInfo(urlPaths: string[]) {
       if (file !== 'info.json') {
         continue
       }
+
       const infoPath = `${parentDir}/${file}`
 
       const infoPathsArray = parentDir.split('/')
@@ -248,7 +239,7 @@ function getGroupInfo(urlPaths: string[]) {
 
       return {
         ...section,
-        url: `/posts/${infoPathsArray.join('/')}`,
+        url: getFirstPost(urlPaths.slice(0, -1)),
       }
     }
   } catch {
