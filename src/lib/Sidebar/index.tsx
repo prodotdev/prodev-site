@@ -1,8 +1,12 @@
+import classNames from 'classnames'
 import { PropsWithChildren } from 'react'
+import styles from '@/lib/Sidebar/Sidebar.module.css'
 
-interface SidebarProps extends PropsWithChildren {}
+interface SidebarProps extends PropsWithChildren {
+  className?: string
+}
 
 export default function Sidebar(props: SidebarProps) {
-  const { children } = props
-  return <div>{children}</div>
+  const { children, className } = props
+  return <div className={classNames(className, styles.root)}>{children}</div>
 }
