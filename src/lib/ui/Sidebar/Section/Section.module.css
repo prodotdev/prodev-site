@@ -1,0 +1,6 @@
+.header {
+  padding: 0.25rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+}

@@ -2,13 +2,11 @@ import Sidebar from '@/lib/ui/Sidebar'
 import Link from '@/lib/ui/Sidebar/Link'
 import Section from '@/lib/ui/Sidebar/Section'
 import Title from '@/lib/ui/Sidebar/Title'
+import styles from '@/app/_components/PostNav/PostNav.module.css'
 
-interface PostNavProps {}
-
-export default function PostNav(props: PostNavProps) {
-  const {} = props
+export default function PostNav() {
   return (
-    <Sidebar>
+    <Sidebar className={styles.root}>
       <Title>Building Your Application</Title>
       <Section title="Routing">
         <Link>Defining Routes</Link>

@@ -2,6 +2,8 @@
 
 .root {
   padding: 1rem 1rem 6.25rem;
+  display: flex;
+  justify-content: center;
 
   @media (min-width: breakpointMd) {
     padding: 1rem 1.25rem 6.25rem;
@@ -16,6 +18,10 @@
 
 .content {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 900px;
 
   @media (min-width: breakpointLg) {
     width: 900px;
