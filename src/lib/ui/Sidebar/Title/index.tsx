@@ -1,5 +1,5 @@
-import styles from '@/lib/ui/Sidebar/Title/Title.module.css'
 import { PropsWithChildren } from 'react'
+import styles from '@/lib/ui/Sidebar/Title/Title.module.css'
 
 interface TitleProps extends PropsWithChildren {}
 
