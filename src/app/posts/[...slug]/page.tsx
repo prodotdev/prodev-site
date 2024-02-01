@@ -7,6 +7,7 @@ import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Title from '@/lib/ui/Title'
 import Heading from '@/lib/ui/Heading'
+import styles from '@/app/posts/[...slug]/_components/Post.module.css'
 
 interface PostProps {
   params: {
@@ -28,11 +29,11 @@ export default function Post(props: PostProps) {
   const post = readPostfile(slug)
 
   return (
-    <div>
+    <div className={styles.root}>
       <AppBar />
       <Page>
         <PageMain>
-          <div>
+          <div className={styles.content}>
             <MDXRemote
               source={post.content}
               options={{
@@ -42,7 +43,7 @@ export default function Post(props: PostProps) {
                 },
               }}
               components={{
-                h1: Title,
+                h1: (props) => <Title className={styles.title} {...props} />,
                 h2: Heading,
               }}
             />
