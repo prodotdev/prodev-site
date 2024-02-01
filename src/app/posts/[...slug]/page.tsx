@@ -8,6 +8,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import Title from '@/lib/ui/Title'
 import Heading from '@/lib/ui/Heading'
 import styles from '@/app/posts/[...slug]/_components/Post.module.css'
+import { notFound } from 'next/navigation'
 
 interface PostProps {
   params: {
@@ -26,7 +27,10 @@ export default function Post(props: PostProps) {
     params: { slug },
   } = props
 
-  const post = readPostfile(slug)
+  const post = getPost(slug)
+  if (!post) {
+    return notFound()
+  }
 
   return (
     <div className={styles.root}>
@@ -64,5 +68,13 @@ function readPostfile(urlPaths: string[]): PostData {
   return {
     ...frontMatter,
     content,
+  }
+}
+
+function getPost(urlPaths: string[]) {
+  try {
+    return readPostfile(urlPaths)
+  } catch {
+    return null
   }
 }
