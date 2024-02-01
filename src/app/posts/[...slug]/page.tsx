@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import { notFound } from 'next/navigation'
 import Title from '@/lib/ui/Title'
 import styles from '@/app/posts/[...slug]/_components/Post.module.css'
 import Heading from '@/lib/ui/Heading'
@@ -26,7 +27,10 @@ export default function Post(props: PostProps) {
     params: { slug },
   } = props
 
-  const post = readPostFile(slug)
+  const post = getPost(slug)
+  if (!post) {
+    return notFound()
+  }
 
   return (
     <div className={styles.root}>
@@ -52,6 +56,14 @@ export default function Post(props: PostProps) {
       </Page>
     </div>
   )
+}
+
+function getPost(urlPaths: string[]) {
+  try {
+    return readPostFile(urlPaths)
+  } catch {
+    return null
+  }
 }
 
 function readPostFile(urlPaths: string[]): PostData {
