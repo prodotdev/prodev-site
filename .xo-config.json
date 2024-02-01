@@ -32,6 +32,7 @@
     "radix": "off",
     "no-warning-comments": "off",
     "node/prefer-global/process": "off",
+    "n/file-extension-in-import": "off",
     "node/prefer-global/buffer": "off",
     "no-constant-condition": "off"
   },
