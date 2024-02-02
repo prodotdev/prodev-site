@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import styles from '@/lib/Sidebar/Section/Section.module.css'
+import styles from '@/lib/ui/Sidebar/Section/Section.module.css'
 import ArrowUpIcon from '@/lib/icons/arrow-up-icon.svg'
 
 interface SectionProps extends PropsWithChildren {
