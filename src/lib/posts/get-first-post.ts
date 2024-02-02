@@ -1,9 +1,10 @@
+import { isDirectory } from '@/lib/file-system/is-directory'
 import fs from 'node:fs'
 import path from 'node:path'
 
 export function getFirstPost(urlPaths: string[]) {
   const fullPath = path.join('posts', urlPaths.join('/'))
-  const isDir = checkIsDirectory(fullPath)
+  const isDir = isDirectory(fullPath)
   if (!isDir) {
     return null
   }
@@ -15,7 +16,7 @@ export function getFirstPost(urlPaths: string[]) {
       return `/${filePath.replace('.mdx', '')}`
     }
 
-    const isNestedDir = checkIsDirectory(filePath)
+    const isNestedDir = isDirectory(filePath)
     if (!isNestedDir) {
       continue
     }
@@ -26,12 +27,4 @@ export function getFirstPost(urlPaths: string[]) {
   }
 
   return null
-}
-
-function checkIsDirectory(dirPath: string) {
-  try {
-    return fs.lstatSync(dirPath).isDirectory()
-  } catch {
-    return false
-  }
 }

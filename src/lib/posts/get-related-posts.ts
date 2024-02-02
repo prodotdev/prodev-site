@@ -2,8 +2,8 @@ import fs from 'node:fs'
 import matter from 'gray-matter'
 import path from 'node:path'
 import { getFirstPost } from '@/lib/posts/get-first-post'
-import { isDirectory } from '@/lib/posts/is-directory'
 import { PostLink } from '@/lib/posts'
+import { isDirectory } from '@/lib/file-system/is-directory'
 
 export function getRelatedPosts(urlPaths: string[]) {
   const links: PostLink[] = []
