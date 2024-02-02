@@ -1,27 +1,18 @@
 import AppBar from '@/app/_components/AppBar'
-import path from 'node:path'
 import Page from '@/lib/ui/Page'
 import PageMain from '@/lib/ui/PageMain'
-import fs from 'node:fs'
-import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Title from '@/lib/ui/Title'
 import Heading from '@/lib/ui/Heading'
 import styles from '@/app/posts/[...slug]/_components/Post.module.css'
 import { notFound } from 'next/navigation'
+import { getPost } from '@/lib/posts/get-post'
 
 interface PostProps {
   params: {
     slug: string[]
   }
 }
-
-interface PostData {
-  title?: string
-  tags?: string[]
-  content: string
-}
-
 export default function Post(props: PostProps) {
   const {
     params: { slug },
@@ -56,25 +47,4 @@ export default function Post(props: PostProps) {
       </Page>
     </div>
   )
-}
-
-function readPostfile(urlPaths: string[]): PostData {
-  const postPath = urlPaths.join('/')
-  const filePath = path.join('posts', postPath + '.mdx')
-
-  const markdownFile = fs.readFileSync(filePath, 'utf8')
-  const { data: frontMatter, content } = matter(markdownFile)
-
-  return {
-    ...frontMatter,
-    content,
-  }
-}
-
-function getPost(urlPaths: string[]) {
-  try {
-    return readPostfile(urlPaths)
-  } catch {
-    return null
-  }
 }
