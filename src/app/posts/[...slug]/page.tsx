@@ -7,6 +7,7 @@ import Heading from '@/lib/ui/Heading'
 import styles from '@/app/posts/[...slug]/_components/Post.module.css'
 import { notFound } from 'next/navigation'
 import { getPost } from '@/lib/posts/get-post'
+import DesktopPostNav from '@/app/_components/DesktopPostNav'
 
 interface PostProps {
   params: {
@@ -44,6 +45,9 @@ export default function Post(props: PostProps) {
             />
           </div>
         </PageMain>
+        {post.series && (
+          <DesktopPostNav series={post.series} topic={post.topic} />
+        )}
       </Page>
     </div>
   )
