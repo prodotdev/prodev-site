@@ -10,12 +10,6 @@ interface DesktopPostNavProps {
   topic: PostLinkGroup | null
 }
 
-export interface NavLink {
-  title: string
-  path: string
-  isCurrent: boolean
-}
-
 export default function DesktopPostNav(props: DesktopPostNavProps) {
   const { series, topic } = props
 
