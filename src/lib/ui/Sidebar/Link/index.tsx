@@ -11,12 +11,14 @@ interface LinkProps extends PropsWithChildren {
 export default function Link(props: LinkProps) {
   const { children, isActive, href } = props
   return (
-    <div
-      className={classNames(styles.root, {
-        [styles.active]: isActive,
-      })}
-    >
-      <NextLink href={href}>{children}</NextLink>
-    </div>
+    <NextLink href={href}>
+      <div
+        className={classNames(styles.root, {
+          [styles.active]: isActive,
+        })}
+      >
+        {children}
+      </div>
+    </NextLink>
   )
 }
