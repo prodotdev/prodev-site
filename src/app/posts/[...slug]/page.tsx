@@ -10,6 +10,8 @@ import { getPost } from '@/lib/posts/get-post'
 import DesktopPostNav from '@/app/_components/DesktopPostNav'
 import { getFiles } from '@/lib/file-system/get-files'
 import path from 'node:path'
+import rehypeHighlight from 'rehype-highlight'
+import '@/app/posts/[...slug]/_components/github-dark.css'
 
 interface PostProps {
   params: {
@@ -37,7 +39,9 @@ export default function Post(props: PostProps) {
               options={{
                 mdxOptions: {
                   remarkPlugins: [],
-                  rehypePlugins: [],
+                  // eslint-disable-next-line
+                  // @ts-expect-error
+                  rehypePlugins: [rehypeHighlight],
                 },
               }}
               components={{
