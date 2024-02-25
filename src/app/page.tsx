@@ -4,6 +4,7 @@ import imagePlaceholder from '@/app/_components/image-placeholder.png'
 import Heading from '@/lib/ui/Heading'
 import Page from '@/lib/ui/Page'
 import PageMain from '@/lib/ui/PageMain'
+import PostSection from '@/lib/ui/PostSection'
 import Title from '@/lib/ui/Title'
 import Image from 'next/image'
 
@@ -13,8 +14,8 @@ export default function Home() {
       <AppBar />
       <Page>
         <PageMain>
-          <div>
-            <Title className={styles.title}>Routing</Title>
+          <Title className={styles.title}>Routing</Title>
+          <PostSection>
             <p>
               A page is UI that is unique to a route. You can define pages by
               exporting a component from a page.js file. Use nested folders to
@@ -26,7 +27,9 @@ export default function Home() {
               directory:
             </p>
             <Image src={imagePlaceholder} alt="placeholder" />
-            <div className="divider" />
+          </PostSection>
+          <div className="divider" />
+          <PostSection>
             <Heading>Nesting Layouts</Heading>
             <p>
               Layouts defined inside a folder (e.g. app/dashboard/layout.js)
@@ -35,7 +38,7 @@ export default function Home() {
               <a href="#">layouts in the file</a> hierarchy are nested, which
               means they wrap child layouts via their children prop.
             </p>
-          </div>
+          </PostSection>
         </PageMain>
       </Page>
     </div>

@@ -1,13 +1,9 @@
 @value breakpointMd, breakpointLg from '@/lib/styles/breakpoints.module.css';
 
 .root {
-  width: 100%;
+  margin-bottom: 1.25rem;
 
   @media (min-width: breakpointMd) {
-    max-width: 420px;
-  }
-
-  @media (min-width: breakpointLg) {
-    max-width: 443px;
+    margin-bottom: 1.5rem;
   }
 }
