@@ -1,6 +1,5 @@
 import AppBar from '@/app/_components/AppBar'
 import styles from '@/app/_components/Home.module.css'
-import PostNav from '@/app/_components/PostNav'
 import imagePlaceholder from '@/app/_components/image-placeholder.png'
 import Heading from '@/lib/ui/Heading'
 import Page from '@/lib/ui/Page'
@@ -38,7 +37,6 @@ export default function Home() {
             </p>
           </div>
         </PageMain>
-        <PostNav />
       </Page>
     </div>
   )
