@@ -8,6 +8,8 @@ import styles from '@/app/posts/[...slug]/_components/Post.module.css'
 import { notFound } from 'next/navigation'
 import { getPost } from '@/lib/posts/get-post'
 import DesktopPostNav from '@/app/_components/DesktopPostNav'
+import { getFiles } from '@/lib/file-system/get-files'
+import path from 'node:path'
 
 interface PostProps {
   params: {
@@ -51,4 +53,17 @@ export default function Post(props: PostProps) {
       </Page>
     </div>
   )
+}
+
+export async function generateStaticParams() {
+  const files = getFiles(path.join('posts'), '.mdx')
+
+  const paths = files.map((filename) => {
+    const slug = filename.replace('.mdx', '').split('/')
+    slug.shift() // remove initial '/posts' path
+
+    return { slug }
+  })
+
+  return paths
 }
