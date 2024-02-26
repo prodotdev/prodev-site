@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react'
+
 import styles from '@/lib/ui/PageMain/PageMain.module.css'
 
 interface PageMainProps extends PropsWithChildren {}

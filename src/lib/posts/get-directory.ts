@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+
 import { getFirstPost } from '@/lib/posts/get-first-post'
 
 export function getDirectory(urlPaths: string[]): {

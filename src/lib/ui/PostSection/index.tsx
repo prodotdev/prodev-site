@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react'
+
 import styles from '@/lib/ui/PostSection/PostSection.module.css'
 
 interface PostSectionProps extends PropsWithChildren {}

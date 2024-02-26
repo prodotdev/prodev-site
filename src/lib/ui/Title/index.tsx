@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react'
-import styles from '@/lib/ui/Title/Title.module.css'
 import classNames from 'classnames'
+import { PropsWithChildren } from 'react'
+
+import styles from '@/lib/ui/Title/Title.module.css'
 
 interface TitleProps extends PropsWithChildren {
   className?: string

@@ -4,7 +4,7 @@
 
 :root {
   --background-100: #000000;
-  --background-64: rgba(0,0,0,0.64);
+  --background-64: rgba(0, 0, 0, 0.64);
 
   --white-100: rgba(255, 255, 255, 1);
   --white-72: rgba(255, 255, 255, 0.72);
@@ -13,8 +13,8 @@
   --white-32: rgba(255, 255, 255, 0.32);
   --white-12: rgba(255, 255, 255, 0.12);
 
-  --brand-900: #A88DFF;
-  --brand-1000: #CBBBFF;
+  --brand-900: #a88dff;
+  --brand-1000: #cbbbff;
 
   --foreground-72: rgba(255, 255, 255, 0.72);
 }
@@ -28,7 +28,6 @@ body {
   line-height: 140%;
   letter-spacing: -0.02rem;
 }
-
 
 p {
   margin-bottom: 0.75rem;

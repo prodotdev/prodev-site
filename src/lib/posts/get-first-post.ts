@@ -1,6 +1,7 @@
-import { isDirectory } from '@/lib/file-system/is-directory'
 import fs from 'node:fs'
 import path from 'node:path'
+
+import { isDirectory } from '@/lib/file-system/is-directory'
 
 export function getFirstPost(urlPaths: string[]) {
   const fullPath = path.join('posts', urlPaths.join('/'))

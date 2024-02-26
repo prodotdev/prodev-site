@@ -1,0 +1,73 @@
+{
+  "root": true,
+  "ignorePatterns": [".next", "out", "next-env.d.ts"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-console": "error",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "import/extensions": "off",
+    "import/no-duplicates": ["error", { "prefer-inline": true }],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^\\u0000"],
+          ["^node:"],
+          ["^@?\\w"],
+          ["index.js"],
+          ["^fixtures/", "^lib/"],
+          ["^"],
+          ["^\\."]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "import/no-relative-parent-imports": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.mjs", "*.cjs"],
+      "extends": ["standard", "prettier"]
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "standard-with-typescript",
+        "standard-jsx",
+        "standard-react",
+        "plugin:react/jsx-runtime",
+        "prettier",
+        "next/core-web-vitals"
+      ],
+      "plugins": ["simple-import-sort", "unused-imports"],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "@typescript-eslint/no-import-type-side-effects": "error",
+        "@typescript-eslint/consistent-type-imports": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "react/function-component-definition": "error",
+        "react-hooks/exhaustive-deps": "error",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "import/extensions": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "import/no-relative-parent-imports": "off"
+      }
+    }
+  ]
+}

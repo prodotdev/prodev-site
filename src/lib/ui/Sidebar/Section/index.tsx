@@ -1,7 +1,8 @@
-import { PropsWithChildren } from 'react'
-import styles from '@/lib/ui/Sidebar/Section/Section.module.css'
-import Link from 'next/link'
 import classNames from 'classnames'
+import Link from 'next/link'
+import { PropsWithChildren } from 'react'
+
+import styles from '@/lib/ui/Sidebar/Section/Section.module.css'
 
 interface SectionProps extends PropsWithChildren {
   title: string

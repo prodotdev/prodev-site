@@ -1,7 +1,9 @@
 import fs from 'node:fs'
-import matter from 'gray-matter'
-import { PostData } from '@/lib/posts'
 import path from 'node:path'
+
+import matter from 'gray-matter'
+
+import { PostData } from '@/lib/posts'
 import { getDirectory } from '@/lib/posts/get-directory'
 import { getRelatedPosts } from '@/lib/posts/get-related-posts'
 

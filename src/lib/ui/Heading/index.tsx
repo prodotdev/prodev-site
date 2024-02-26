@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react'
-import styles from '@/lib/ui/Heading/Heading.module.css'
 import classNames from 'classnames'
+import { PropsWithChildren } from 'react'
+
+import styles from '@/lib/ui/Heading/Heading.module.css'
 
 interface HeadingProps extends PropsWithChildren {
   className?: string
