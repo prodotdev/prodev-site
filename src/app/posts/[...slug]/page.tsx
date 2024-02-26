@@ -39,8 +39,7 @@ export default function Post(props: PostProps) {
               options={{
                 mdxOptions: {
                   remarkPlugins: [],
-                  // eslint-disable-next-line
-                  // @ts-expect-error
+                  // @ts-expect-error: rehypeHighlight plugin doesn't fit MDXRemote types
                   rehypePlugins: [rehypeHighlight],
                 },
               }}

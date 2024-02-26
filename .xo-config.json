@@ -3,7 +3,6 @@
   "space": true,
   "semicolon": false,
   "ignore": [],
-  "extends": ["next/core-web-vitals"],
   "rules": {
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-call": "off",
