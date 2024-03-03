@@ -4,4 +4,66 @@ tags:
  - Building prodev
 ---
 
-app pages
+This is the design for the prodev website, which is a combination of a blog, and a video tutorial site. Each article or post will usually have a video, and notes. Articles are grouped together into sections, and all of the sections together will make up a series.
+
+## Pages
+
+This app has 4 main pages, and we want to understand how a user might navigate between them.
+
+### 1. Main Page
+
+The main page is the home page, and shows a list of articles.
+
+#### Article
+
+Each article looks like a typical blog post with a title, and sub-headings. An article is also made up of other optional components including:
+
+- metadata
+- tags
+- callouts
+- link styles
+- highlighting
+- video
+- code blocks
+- list styles
+- bold text
+- images
+
+### 2. Discussion Page
+
+Next page across is the `discussion_page`. This looks like a comments page for user highlighted texts from the article. There is a text editor to add a comment. Users can also write code in the editor, so we need one with syntax highlighting, and code formatting.
+
+Further down, we can see other comments, and replies, which are indented. There is also a *Show more* button, so there might be some behavior required to collapse replies.
+
+To the right, there is a sidebar with 2 sections: *Article*, and *Other Discussions*. *Article* is a link that goes back to the original article, and *Other Discussions* showing other highlights from the same article.
+
+### 3. Account Settings
+
+A page where users can configure the following:
+
+- avatar
+- nickname
+- notification settings
+
+This is usually a good area to ask which features are required at launch, and which can be completed in a later release.
+
+To the bottom, there's an example confirmation dialog for when a user wants to delete their account.
+
+### 4. Replies Page
+
+This is an overview of new replies to threads that the user is a part of.
+
+Most of the UI looks like it's re-using the same components as the *Discussion Page*, so we might place those components in a shared location. For example, **lib/ui/Comment.tsx**.
+
+### Summary
+
+After we've looked at all the pages, we should prioritize them, so that we can release as quickly as possible. Rather than working on 4 pages at once, and not being able to release anything 6 weeks later, it's more valuable if we can release the first page within 2 weeks.
+
+Possible order of implementation:
+
+1. Main page first so users can start reading immediately.
+2. Account settings because you need accounts to save highlights, and comment.
+3. Discussion which require accounts to be hooked up.
+4. New Replies come last because a lot of the UI needs to come from the Discussion Page.
+
+If we had the resources to work on multiple pages at once, I would still recommend that we did the *Main Page*, and sub-components first, and then Account, and Discussion could be worked on at the same time because they are separate parts of the app. Meaning they don't share UI dependencies. New Replies still comes last because it uses the same components as the Discussion Page.
