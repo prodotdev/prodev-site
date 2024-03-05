@@ -4,4 +4,31 @@ tags:
  - Building prodev
 ---
 
-# Next js init...
+Use `npx` to create a new Next.js app, so make sure you have node, and npm installed. Next, run `npx create-next-app@latest`:
+
+![clipboard.png](inkdrop://file:Vg4jiua15)
+
+- Typescript - yes
+- Source directory -yes
+- App route - yes (important)
+- Customize alias - no (use default `@`)
+
+
+Run `npm run dev` to start site up. Confirm everything works by visiting `http://localhost:3000` in your browser. If everything worked, you should see the Next.js page.
+
+### Adding .nvmrc
+
+Add a `.nvmrc` file in the project root to tell other developers what node version is required for the app.
+
+![clipboard.png](inkdrop://file:TzBX0GIxj)
+
+When a user has nvm installed, and opens a directory with an `.nvmrc`, they'll automatically download, and install the specified version. Making sure everybody is on the same node version is good practice because that could affect the package versions that you will install.
+
+### Creating the project in Github
+
+In github, create a new Repository, and copy the repo url.
+
+![clipboard.png](inkdrop://file:qlddQUwNR)
+We'll add the origin to git by running `git remote add origin git@github.com:prodotdev/prodev-site.git`, and push up our code by running `git push --set-upstream origin main`.
+
+![clipboard.png](inkdrop://file:oJjOgSiE-)
