@@ -33,7 +33,7 @@ interface GetLinkContext {
 }
 
 function getLink(post: string, context: GetLinkContext): PostLink | null {
-  const { urlPaths, parentDir, parentPath } = context
+  const { urlPaths, parentDir } = context
 
   const target = urlPaths.at(-1) + '.mdx'
   const siblingPath = `${parentDir}/${post}`
@@ -61,7 +61,11 @@ function getLink(post: string, context: GetLinkContext): PostLink | null {
   const infoPath = `${siblingPath}/info.json`
   const info = JSON.parse(fs.readFileSync(infoPath, 'utf8'))
 
-  const firstPost = getFirstPost(parentPath)
+  const currentDir = siblingPath.split('/')
+  currentDir.shift()
+
+  const firstPost = getFirstPost(currentDir)
+
   if (!firstPost) {
     return null
   }
