@@ -1,0 +1,33 @@
+---
+title: Build check
+tags: 
+ - Building prodev
+---
+
+Another easy win we can do is make sure our app always builds, and that we haven't broken anything. To build the app, we run `npm run build`, but this is pretty slow, and it's tedious to run every time, so we'll add this to CI instead.
+
+```yaml
+name: Validate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run build
+
+```
+
+Now we'll know if our branch fails to build before merging it into **main**.
+
+
+

@@ -1,0 +1,61 @@
+---
+title: Auto-Formatting on CI
+tags: 
+ - Building prodev
+---
+
+# Auto-formatting on CI
+
+As part of our Continuous Integration (CI) we want to auto-format code whenever it's pushed to Github. This makes sure when somebody is viewing the changes, or diff, in a Pull Request, they'll only see the actual code changes that matter, and none of the formatting, or style differences.
+
+- Project has format script that will update our code when run
+- go edit file, and run format
+- Have to remember to do it each time before opening a Pull Request
+- We can setup GH actions to auto-format for us
+- create new workflow called validate
+- commit & push to github
+- make change & push to github, see changes
+- now we can be sure the github diff only shows the changes that matter, and no styling differences
+- Added auto-code formatting as part of our Continuous Integration or CI
+
+```
+name: 💯 Validate
+on:
+  push:
+    branches:
+      - '**' # all branches
+      - '!prod'
+      - '!staging'
+
+jobs:
+  format:
+    name: 🔨 Format
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: npm i
+      - run: npm run format
+
+      - name: Commit and Push
+        uses: stefanzweifel/git-auto-commit-action@v4.2.0
+        id: auto_commit_action
+        with:
+          commit_user_name: emenu_bot
+          commit_user_email: bot@emenu.app
+          commit_author: emenu bot <bot@emenu.app>
+          commit_message: Bot - Fix Formatting
+
+      - name: Success
+        if: steps.auto_commit_action.outputs.changes_detected == 'false'
+        run: echo "Format check... PASS!"
+
+      - name: Fail
+        if: steps.auto_commit_action.outputs.changes_detected == 'true'
+        run: echo "Fixed formatting, and pushed changes" && exit 1
+```
+
+Pull Request: https://github.com/prodotdev/prodev-site/pull/2

@@ -1,0 +1,82 @@
+---
+title: Typechecking
+tags: 
+ - Building prodev
+---
+
+We can check to see if our project has any type errors by manually running `npx tsc --noEmit`. We add the `noEmit` flag to tell the typescript compiler, that we don't care about the output, which makes it run a bit faster.
+
+Since we'll be running this pretty often, we'll add it to a `package.json` script:
+
+**package.json**
+
+```json
+{
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}
+```
+
+We can go one step further, and have our CI run typechecks on any code changes, too.
+
+**.github/workflows/validate.yml**
+
+```yaml
+name: Validate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run typecheck
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.BOT_GH_TOKEN }}
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run format
+      - name: Commit & Push
+        uses: stefanzweifel/git-auto-commit-action@v4.2.0
+        id: auto_commit_action
+        with:
+          commit_user_name: prodev-bot
+          commit_user_email: bot@prodev.sh
+          commit_author: prodev bot <bot@prodev.sh>
+          commit_message: Bot - Fix formatting
+      - name: Success
+        if: steps.auto_commit_action.outputs.changes_detected == 'false'
+        run: echo "Format check... PASS!"
+      - name: Error
+        if: steps.auto_commit_action.outputs.changes_detected == 'true'
+        run: echo "Fixed formatting... pushed changes!" && exit 1
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run build
+
+```
+  
+Pull Request: https://github.com/prodotdev/prodev-site/pull/4
