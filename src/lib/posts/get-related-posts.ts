@@ -12,7 +12,6 @@ export function getRelatedPosts(urlPaths: string[]) {
 
   try {
     const siblingPosts = fs.readdirSync(parentDir)
-    console.log(siblingPosts)
 
     for (const post of siblingPosts) {
       const link = getLink(post, { urlPaths, parentDir, parentPath })
@@ -34,7 +33,7 @@ interface GetLinkContext {
 }
 
 function getLink(post: string, context: GetLinkContext): PostLink | null {
-  const { urlPaths, parentDir, parentPath } = context
+  const { urlPaths, parentDir } = context
 
   const target = urlPaths.at(-1) + '.mdx'
   const siblingPath = `${parentDir}/${post}`
