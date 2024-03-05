@@ -12,6 +12,7 @@ export function getRelatedPosts(urlPaths: string[]) {
 
   try {
     const siblingPosts = fs.readdirSync(parentDir)
+    console.log(siblingPosts)
 
     for (const post of siblingPosts) {
       const link = getLink(post, { urlPaths, parentDir, parentPath })
@@ -61,7 +62,11 @@ function getLink(post: string, context: GetLinkContext): PostLink | null {
   const infoPath = `${siblingPath}/info.json`
   const info = JSON.parse(fs.readFileSync(infoPath, 'utf8'))
 
-  const firstPost = getFirstPost(parentPath)
+  const currentDir = siblingPath.split('/')
+  currentDir.shift()
+
+  const firstPost = getFirstPost(currentDir)
+
   if (!firstPost) {
     return null
   }
