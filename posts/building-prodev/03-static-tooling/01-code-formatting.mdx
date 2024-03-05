@@ -1,0 +1,99 @@
+---
+title: Setup Code Formatting
+tags: 
+ - Building prodev
+---
+
+# Setup Code Formatting
+
+To format our code, and keep it consistent, we'll install a node package called **xo**(https://github.com/xojs/xo).
+
+Run `npm install --save-dev xo`, and verify it works by executing `npx xo`. The first time you run it, it should spit out a bunch of errors.
+
+You can use **xo** out the box, but I have a set of defaults that I personally like to use across projects, so I'll be adding a custom config.
+
+Create a **.xo-config.json** file in the project root with the following:
+
+```json
+{
+  "prettier": true,
+  "space": true,
+  "semicolon": false,
+  "ignore": [],
+  "rules": {
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/no-implicit-any-catch": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/padding-line-between-statements": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/camelcase": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/prefer-export-from": "off",
+    "@typescript-eslint/prefer-regexp-exec": "off",
+    "unicorn/prefer-number-properties": "off",
+    "unicorn/no-array-reduce": "off",
+    "unicorn/prefer-module": "off",
+    "unicorn/no-await-expression-member": "off",
+    "import/extensions": "off",
+    "import/no-anonymous-default-export": "off",
+    "import/no-named-as-default": "off",
+    "import/no-cycle": "off",
+    "capitalized-comments": "off",
+    "no-await-in-loop": "off",
+    "new-cap": "off",
+    "radix": "off",
+    "no-warning-comments": "off",
+    "node/prefer-global/process": "off",
+    "node/prefer-global/buffer": "off",
+    "no-constant-condition": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "unicorn/catch-error-name": "off",
+        "import/order": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "(res)|(req)|^_",
+            "varsIgnorePattern": "(res)|(req)|^_",
+            "caughtErrorsIgnorePattern": "(res)|(req)|^_"
+          }
+        ],
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/consistent-type-imports": "off"
+      }
+    }
+  ]
+}
+```
+
+We can run **xo**, and ask it to automatically fix any issues by adding the `--fix` option: `npx xo --fix`. If **xo** is able to fix all the errors, you shouldn't see any output. Verify that everything has been updated, by running `npx xo` again.
+
+Finally, just for clarity, we'll add a couple `npm` scripts to run **xo** for us. Add the following scripts to your **package.json**.
+
+**package.json**
+
+```json
+{
+  "scripts": {
+    ...
+    "format": "xo --fix",
+    "format:check": "xo"
+  },
+}
+```
+
+`xo`, and `xo --fix` are the same commands we ran previously, just without specifying `npx`! Now to format our code, we can simple run `npm run format`, which is a little clearer.
+
+If this is the first time you're seeing **xo**, but you've heard of **ESLint**, or **Prettier**, **xo** is essentially pre-co-nfigured **ESLint**, with code formatting settings as well, so you don't need to run **Prettier** separately.
+
+Pull Request: https://github.com/prodotdev/prodev-site/pull/1
+  
