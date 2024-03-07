@@ -1,0 +1,80 @@
+---
+title: Global Styles
+tags: 
+ - Building prodev
+ - Next.js
+---
+
+# Global Styles
+
+## Set font to Fira Sans (another Google font)
+
+Next.js provides a package to handle Google fonts, `next/font/google`.
+
+Import the font we want, `Fira_Sans`, from the package, and specify the font-weights.
+
+**src/app/layout.tsx**
+
+```ts
+import { Fira_Sans } from 'next/font/google'
+
+const firaSans = Fira_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+})
+```
+
+Add the font classname to the `<body>` tag to have it applied throughout the app:
+
+**src/app/layout.tsx**
+
+```ts
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={firaSans.className}>{children}</body>
+    </html>
+  )
+}
+```
+
+## Set background & foreground colors via CSS variables
+
+**src/app/global.css**
+
+```css
+:root {
+  --background-100: #000000;
+
+  --foreground-72: rgba(255, 255, 255, 0.72);
+}
+```
+
+Now we can use the variables inside our `body` styles:
+
+```css
+body {
+  background: var(--background-100);
+  color: var(--foreground-72);
+}
+```
+
+## Default font styles
+
+Add the default font style to the `body` 
+
+```css
+body {
+  ...
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.02rem;
+}
+```
+
+PR: https://github.com/prodotdev/prodev-site/pull/9
