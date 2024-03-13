@@ -1,0 +1,49 @@
+---
+title: App Bar & Logo
+tags:
+  - Building prodev
+---
+
+# Add Components
+
+We'll start by scaffolding out a couple components to get the content, before applying styling.
+
+## `AppBar`
+
+**src/app/_components/AppBar/index.tsx**
+
+```tsx
+import logo from '@/lib/images/logo-white.png'
+import Image from 'next/image'
+
+export default function AppBar() {
+  return (
+    <div>
+      <Image src={logo} width={112} height={36} alt="prodev" />
+    </div>
+  )
+}
+```
+
+- logo saved in **src/lib/images/logo-white.png**.
+- Add logo via Next.js' `<Image/>` component.
+
+
+## Add `AppBar` to `Home`
+
+**src/app/page.tsx**
+
+```tsx
+import AppBar from '@/app/_components/AppBar'
+
+export default function Home() {
+  return (
+    <div>
+      <AppBar />
+    </div>
+  )
+}
+```
+
+
+Pull Request: https://github.com/prodotdev/prodev-site/pull/12
